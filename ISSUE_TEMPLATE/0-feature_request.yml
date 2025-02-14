@@ -1,0 +1,50 @@
+name: "Feature Request Issue"
+description: "Guided creation of an feature request for `openMCP`..."
+title: "Feature: <one liner describing what this feature will do> "
+labels: ["kind/feature-request", "needs/validation"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: "Understand the problem"
+      description: "Describe challenge this feature will solve/mitigate"
+      placeholder: |
+        <in which situation does the need for this feature come up?>
+        <how are solving/can you solve this today?>
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: "Context"
+      description: "Link anything worth sharing"
+      placeholder: |
+        <Describe your motivation>
+        <Link existing product feature this may enhance>
+        <List out-of-scope aspects>
+    validations:
+      required: false
+  - type: textarea
+    id: solution
+    attributes:
+      label: "Proposal Acceptance Criteria"
+      description: "What kind of acceptance criteria for the feature from a users perspective would you anticipate?"
+      placeholder: |
+        <Put yourself into the shoes of a PO. What needs to be done to call this feature DONE?>
+        - [ ] <Feature acceptance criteria 1>
+        - [ ] <Feature acceptance criteria 2>
+        - [ ] <Feature acceptance criteria 3>
+        - [ ] <Feature is documented in end user docs>
+        - [ ] ...
+    validations:
+      required: true
+  - type: textarea
+    id: additional-contacts
+    attributes:
+      label: "How much traction does this feature have?"
+      description: "Use this field to reference additional stakeholders or orgs, link community threads , etc."
+      placeholder: |
+        - <Mail Addresses>
+        - <and/or link to community threads>
+    validations:
+      required: false

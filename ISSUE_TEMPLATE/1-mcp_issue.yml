@@ -1,0 +1,112 @@
+name: "`openMCP` Issue"
+description: "Guided creation of an issue for a `openMCP`"
+title: "<problem title> "
+labels: ["kind/bug", "needs/tech-advice"]
+body:
+  - type: markdown
+    attributes:
+      value: "# `openMCP` help center "
+  - type: markdown
+    attributes:
+      value: |
+        Some issues don't need the involvement of a DoD. To help us help you more effectively, take a look at these helpful links. 
+        If you can't find a solution, go ahead and create a ticket.
+        - TODO: Link support pages here once life - OTT/KOBER
+  - type: markdown
+    attributes:
+      value: "# Impact"
+  - type: markdown
+    attributes:
+      value: |
+        Please provide information for this issue, such as specifying which MCP affected.
+        By categorizing and prioritizing the issue appropriately, you can help us process this ticket faster.
+  - type: textarea
+    id: similar-issues
+    attributes:
+      label: "Is the same problem occurring with other `openMCP`s?"
+      description: In case other users are report similar issues, please post the issue links here.
+      placeholder: "Please post the links other `openMCP`s affected by this issue"
+    validations:
+      required: false
+  - type: dropdown
+    id: priority
+    validations:
+      required: true
+    attributes:
+      label: "Please assign the appropriate priority to this issue."
+      description: "Please use the priorities critical / blocker carefully. TODO: Link Priority definitions (OTT/KOBER)"
+      options:
+        - /priority normal
+        - /priority critical
+        - /priority blocker
+  - type: markdown
+    attributes:
+      value: "# Issue Details"
+  - type: input
+    id: timestamp
+    attributes:
+      label: "When did it (start to) happen?"
+      description: "Please provide a UTC timestamp to indicate when the issue happened or started to happen."
+      placeholder: "2029-01-01T15:00:00Z"
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: "What happened?"
+      description: "Please describe the issue as detailed as possible."
+      placeholder: "..."
+    validations:
+      required: true
+  - type: textarea
+    id: what-was-expected
+    attributes:
+      label: "What did you expect to happen and why?"
+      description: "Please explain what you expected to happen and describe the configuration or resources that should have led to the expected behavior."
+      placeholder: "..."
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: "Please provide meaningful logs that outline the issue"
+      description: "Please share any meaningful logs. For example, debug logs from a command line or snippets from the logging stack are a great starting point. [Check out this example for how to analyze some issues](https://pages.github.tools.sap/cloud-orchestration/docs/managed-control-planes/fundamentals). If there are no relevant logs, enter n/a."
+      placeholder: "..."
+      render: bash
+    validations:
+      required: true
+  - type: textarea
+    id: how-to-reproduce
+    attributes:
+      label: "How can we reproduce the issue (concisely and precisely)?"
+      placeholder: |
+        1.
+        2.
+        3.
+    validations:
+      required: false
+  - type: textarea
+    id: troubleshooting
+    attributes:
+      label: "Actions taken"
+      description: "Please describe what steps, if any, you've taken to understand, analyze, mitigate or isolate this issue."
+      placeholder: "..."
+    validations:
+      required: true
+  - type: textarea
+    id: anything-else
+    attributes:
+      label: "Anything else we should know?"
+    validations:
+      required: false
+  - type: textarea
+    id: additional-contacts
+    attributes:
+      label: "Any additional contacts to add?"
+      description: "These users will be considered as co-authors by our bot automation. Please follow the same exact structure as placeholder."
+      placeholder: |
+        - @D123456
+        - @I654321
+        - ...
+    validations:
+      required: false

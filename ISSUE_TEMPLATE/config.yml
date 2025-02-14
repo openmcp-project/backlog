@@ -1,0 +1,23 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Crossplane in General
+    url: https://github.com/crossplane/crossplane
+    about: General support around Crossplane
+  - name: Crossplane BTP Provider
+    url: https://github.com/SAP/crossplane-provider-btp
+    about: Crossplane provider for SAP BTP (Open-source)
+  - name: Landscaper
+    url: https://github.com/gardener/landscaper
+    about: General support around Landscaper
+  - name: Open Component Model
+    url: https://github.com/open-component-model
+    about: General support around Open Component Model
+  - name: BTP Service Operator
+    url: https://github.com/SAP/sap-btp-service-operator
+    about: General support around BTP Service operator
+  - name: External Secrets Operator
+    url: https://github.com/external-secrets/external-secrets
+    about: General support around External Secrets operator
+  - name: External Secrets Operator
+    url: https://github.com/kyverno/kyverno
+    about: General support around Kyverno
