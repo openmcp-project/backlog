@@ -15,7 +15,7 @@ jobs:
         with:
           script: |
             const org = context.repo.owner;
-            const projectNames = ["P1", "P2"];  // Update these as needed
+            const projectNames = ["P1", "P2"];  // Adjust project names as needed
 
             const query = `query($org: String!) {
               organization(login: $org) {
@@ -32,7 +32,8 @@ jobs:
 
             if (!result.organization || !result.organization.projectsV2.nodes.length) {
               console.log("❌ No projects found.");
-              return JSON.stringify({});
+              core.setOutput("project_ids", "{}");
+              return;
             }
 
             let projectIds = {};
@@ -47,25 +48,32 @@ jobs:
               console.log(`Project "${name}" = Project ID: "${id}"`);
             });
 
-            return JSON.stringify(projectIds);  # ✅ Always returns valid JSON
+            core.setOutput("project_ids", JSON.stringify(projectIds));  # ✅ Safe JSON storage
 
-      # ✅ Step 2: Set project IDs as environment variable
-      - name: Store Project IDs
-        run: echo "PROJECT_IDS=${{ steps.get_project_ids.outputs.result }}" >> $GITHUB_ENV
-
-      # ✅ Step 3: Fetch Column IDs
+      # ✅ Step 2: Fetch Column IDs
       - name: Get Column IDs
         id: get_columns
         uses: actions/github-script@v7
         env:
-          PROJECT_IDS: ${{ env.PROJECT_IDS }}  # ✅ Fetch stored project IDs
+          PROJECT_IDS: ${{ steps.get_project_ids.outputs.project_ids }}
         with:
           script: |
-            const projectIds = process.env.PROJECT_IDS ? JSON.parse(process.env.PROJECT_IDS) : {};
+            const projectIdsRaw = process.env.PROJECT_IDS;
+            let projectIds = {};
+
+            // ✅ Ensure it's valid JSON
+            try {
+              projectIds = JSON.parse(projectIdsRaw);
+            } catch (error) {
+              console.log("❌ Failed to parse PROJECT_IDS:", error);
+              core.setOutput("columns", "{}");
+              return;
+            }
 
             if (Object.keys(projectIds).length === 0) {
               console.log("❌ No valid project IDs found.");
-              return JSON.stringify({});
+              core.setOutput("columns", "{}");
+              return;
             }
 
             let columnData = {};
@@ -104,4 +112,4 @@ jobs:
               });
             });
 
-            return JSON.stringify(columnData);
+            core.setOutput("columns", JSON.stringify(columnData));  # ✅ Safe JSON storage
