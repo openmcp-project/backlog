@@ -15,7 +15,7 @@ jobs:
         with:
           script: |
             const org = context.repo.owner;
-            const projectNames = ["Refinement Board", "Project Backlog"];  // Must match the project names
+            const projectNames = ["P1", "P2"];  // Update these as needed
 
             const query = `query($org: String!) {
               organization(login: $org) {
@@ -47,15 +47,21 @@ jobs:
               console.log(`Project "${name}" = Project ID: "${id}"`);
             });
 
-            return JSON.stringify(projectIds);  // ✅ Ensures JSON is valid
+            return JSON.stringify(projectIds);  # ✅ Always returns valid JSON
 
-      # ✅ Step 2: Fetch Column IDs
+      # ✅ Step 2: Set project IDs as environment variable
+      - name: Store Project IDs
+        run: echo "PROJECT_IDS=${{ steps.get_project_ids.outputs.result }}" >> $GITHUB_ENV
+
+      # ✅ Step 3: Fetch Column IDs
       - name: Get Column IDs
         id: get_columns
         uses: actions/github-script@v7
+        env:
+          PROJECT_IDS: ${{ env.PROJECT_IDS }}  # ✅ Fetch stored project IDs
         with:
           script: |
-            const projectIds = JSON.parse('${{ steps.get_project_ids.outputs.result || "{}" }}');
+            const projectIds = process.env.PROJECT_IDS ? JSON.parse(process.env.PROJECT_IDS) : {};
 
             if (Object.keys(projectIds).length === 0) {
               console.log("❌ No valid project IDs found.");
