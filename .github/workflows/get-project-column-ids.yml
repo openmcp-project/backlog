@@ -1,21 +1,21 @@
 name: Fetch Project & Column IDs
 
 on:
-  workflow_dispatch:  # ✅ Manual trigger only
+  workflow_dispatch:
 
 jobs:
   fetch-ids:
     runs-on: ubuntu-latest
     steps:
 
-      # ✅ Step 1: Fetch Project IDs for both projects
+      # ✅ Step 1: Fetch Project IDs
       - name: Get Project IDs
         id: get_project_ids
         uses: actions/github-script@v7
         with:
           script: |
             const org = context.repo.owner;
-            const projectNames = ["Refinement Board", "Project Backlog"];  // Must match the Project Names
+            const projectNames = ["Refinement Board", "Project Backlog"];  // Must match the project names
 
             const query = `query($org: String!) {
               organization(login: $org) {
@@ -30,6 +30,11 @@ jobs:
 
             const result = await github.graphql(query, { org });
 
+            if (!result.organization || !result.organization.projectsV2.nodes.length) {
+              console.log("❌ No projects found.");
+              return JSON.stringify({});
+            }
+
             let projectIds = {};
             result.organization.projectsV2.nodes.forEach(p => {
               if (projectNames.includes(p.title)) {
@@ -42,13 +47,20 @@ jobs:
               console.log(`Project "${name}" = Project ID: "${id}"`);
             });
 
-      # ✅ Step 2: Fetch Column IDs for each project
+            return JSON.stringify(projectIds);  // ✅ Ensures JSON is valid
+
+      # ✅ Step 2: Fetch Column IDs
       - name: Get Column IDs
         id: get_columns
         uses: actions/github-script@v7
         with:
           script: |
-            const projectIds = JSON.parse('${{ steps.get_project_ids.outputs.result }}');
+            const projectIds = JSON.parse('${{ steps.get_project_ids.outputs.result || "{}" }}');
+
+            if (Object.keys(projectIds).length === 0) {
+              console.log("❌ No valid project IDs found.");
+              return JSON.stringify({});
+            }
 
             let columnData = {};
             for (const [projectName, projectId] of Object.entries(projectIds)) {
@@ -67,6 +79,11 @@ jobs:
 
               const result = await github.graphql(query, { projectId });
 
+              if (!result.node || !result.node.fields.nodes.length) {
+                console.log(`❌ No columns found for Project ${projectName}.`);
+                continue;
+              }
+
               columnData[projectName] = {};
               result.node.fields.nodes.forEach(field => {
                 columnData[projectName][field.name] = field.id;
@@ -80,3 +97,5 @@ jobs:
                 console.log(`  Column "${name}" = ID: "${id}"`);
               });
             });
+
+            return JSON.stringify(columnData);
