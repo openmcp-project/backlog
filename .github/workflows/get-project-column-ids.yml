@@ -101,10 +101,11 @@ jobs:
               const columnsQuery = `query($projectId: ID!) {
                 node(id: $projectId) {
                   ... on ProjectV2 {
-                    items(first: 10) {
+                    fields(first: 10) {
                       nodes {
                         id
                         name
+                        dataType
                       }
                     }
                   }
@@ -113,10 +114,10 @@ jobs:
 
               const columnsResult = await github.graphql(columnsQuery, { projectId });
 
-              if (columnsResult.node && columnsResult.node.items.nodes.length) {
-                columns[projectName] = columnsResult.node.items.nodes.map(item => ({
-                  id: item.id,
-                  name: item.title
+              if (columnsResult.node && columnsResult.node.fields.nodes.length) {
+                columns[projectName] = columnsResult.node.fields.nodes.map(field => ({
+                  id: field.id,
+                  name: field.name
                 }));
               }
             }
