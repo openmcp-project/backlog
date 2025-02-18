@@ -103,12 +103,13 @@ jobs:
                   ... on ProjectV2 {
                     fields(first: 10) {
                       nodes {
-                        id
-                        name
-                        __typename
                         ... on ProjectV2SingleSelectField {
                           id
                           name
+                          options {
+                            id
+                            name
+                          }
                         }
                       }
                     }
