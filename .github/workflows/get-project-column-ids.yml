@@ -51,7 +51,7 @@ jobs:
               console.log(`Project "${name}" = Project ID: "${id}"`);
             });
 
-            core.setOutput("project_ids", JSON.stringify(projectIds));  # ✅ Safe JSON storage
+            core.setOutput("project_ids", JSON.stringify(projectIds)); 
 
       # ✅ Step 2: Fetch Column IDs
       - name: Get Column IDs
@@ -115,4 +115,4 @@ jobs:
               });
             });
 
-            core.setOutput("columns", JSON.stringify(columnData));  # ✅ Safe JSON storage
+            core.setOutput("columns", JSON.stringify(columnData));
