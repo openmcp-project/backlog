@@ -131,11 +131,5 @@ jobs:
               }
 
             console.log("====== COLUMNS ======");
-            Object.entries(columns).forEach(([projectName, columns]) => {
-              console.log(`Project "${projectName}" Columns:`);
-              columns.forEach(column => {
-                console.log(`  Column "${column.name}" = Column ID: "${column.id}"`);
-              });
-            });
-
+                    
             core.setOutput("columns", JSON.stringify(columns)); 
