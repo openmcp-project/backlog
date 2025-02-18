@@ -95,40 +95,40 @@ jobs:
               return;
             }
 
-            let columnData = {};
+            // Fetch columns for each project
+            let columns = {};
             for (const [projectName, projectId] of Object.entries(projectIds)) {
-              const query = `query($projectId: ID!) {
+              const columnsQuery = `query($projectId: ID!) {
                 node(id: $projectId) {
                   ... on ProjectV2 {
                     fields(first: 10) {
                       nodes {
-                        id
-                        name
+                        ... on ProjectV2FieldConfiguration {
+                          id
+                          name
+                        }
                       }
                     }
                   }
                 }
               }`;
 
-              const result = await github.graphql(query, { projectId });
+              const columnsResult = await github.graphql(columnsQuery, { projectId });
 
-              if (!result.node || !result.node.fields.nodes.length) {
-                console.log(`❌ No columns found for Project ${projectName}.`);
-                continue;
+              if (columnsResult.node && columnsResult.node.fields.nodes.length) {
+                columns[projectName] = columnsResult.node.fields.nodes.map(field => ({
+                  id: field.id,
+                  name: field.name
+                }));
               }
-
-              columnData[projectName] = {};
-              result.node.fields.nodes.forEach(field => {
-                columnData[projectName][field.name] = field.id;
-              });
             }
 
-            console.log("====== COLUMN IDs ======");
-            Object.entries(columnData).forEach(([project, columns]) => {
-              console.log(`Project "${project}":`);
-              Object.entries(columns).forEach(([name, id]) => {
-                console.log(`  Column "${name}" = ID: "${id}"`);
+            console.log("====== COLUMNS ======");
+            Object.entries(columns).forEach(([projectName, columns]) => {
+              console.log(`Project "${projectName}" Columns:`);
+              columns.forEach(column => {
+                console.log(`  Column "${column.name}" = Column ID: "${column.id}"`);
               });
             });
 
-            core.setOutput("columns", JSON.stringify(columnData));
+            core.setOutput("columns", JSON.stringify(columns));
