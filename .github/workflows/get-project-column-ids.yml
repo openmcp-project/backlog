@@ -33,6 +33,9 @@ jobs:
 
             const result = await github.graphql(query, { org });
 
+            console.log(result);
+
+
             if (!result.organization || !result.organization.projectsV2.nodes.length) {
               console.log("❌ No projects found.");
               core.setOutput("project_ids", "{}");
