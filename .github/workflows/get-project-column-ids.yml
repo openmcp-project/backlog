@@ -3,6 +3,9 @@ name: Fetch Project & Column IDs
 on:
   workflow_dispatch:
 
+env:
+  ACTIONS_STEP_DEBUG: true
+  
 jobs:
   fetch-ids:
     runs-on: ubuntu-latest
