@@ -94,27 +94,3 @@ jobs:
               core.setOutput("columns", "{}");
               return;
             }
-
-            // Fetch columns for each project
-            let columns = {};
-            for (const [projectName, projectId] of Object.entries(projectIds)) {
-              const columnsQuery = `query($projectId: ID!) {
-                node(id: $projectId) {
-                  ... on ProjectV2 {
-                    fields(first: 10) {
-                      nodes {
-                        ... on ProjectV2SingleSelectField {
-                          id
-                          name
-                          options {
-                            id
-                            name
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }`;
-
-              const columnsResult = await github.graphql(columnsQuery, { projectId });
