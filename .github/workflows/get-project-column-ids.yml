@@ -103,9 +103,10 @@ jobs:
                   ... on ProjectV2 {
                     fields(first: 10) {
                       nodes {
-                        id
-                        name
-                        dataType
+                        ... on ProjectV2FieldConfiguration {
+                          id
+                          name
+                          dataType
                       }
                     }
                   }
