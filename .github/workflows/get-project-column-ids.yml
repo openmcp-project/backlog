@@ -106,7 +106,7 @@ jobs:
                         ... on ProjectV2FieldConfiguration {
                           id
                           name
-                          dataType
+                        }
                       }
                     }
                   }
