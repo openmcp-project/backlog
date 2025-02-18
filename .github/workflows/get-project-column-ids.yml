@@ -122,7 +122,10 @@ jobs:
               if (columnsResult.node && columnsResult.node.fields.nodes.length) {
                 columns[projectName] = columnsResult.node.fields.nodes.map(field => ({
                   id: field.id,
-                  name: field.name
+                  name: field.name,
+                  options: field.options ? field.options.map(option => ({
+                    id: option.id,
+                    name: option.name                
                 }));
               }
             }
@@ -132,6 +135,12 @@ jobs:
               console.log(`Project "${projectName}" Columns:`);
               columns.forEach(column => {
                 console.log(`  Column "${column.name}" = Column ID: "${column.id}"`);
+                if (column.options.length) {
+                  console.log(`    Options:`);
+                  column.options.forEach(option => {
+                    console.log(`      Option "${option.name}" = Option ID: "${option.id}"`);
+                  });
+                }
               });
             });
 
