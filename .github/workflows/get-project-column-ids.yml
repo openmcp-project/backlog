@@ -18,7 +18,7 @@ jobs:
         with:
           script: |
             const org = context.repo.owner;
-            const projectNames = ["P1", "P2"];  // Adjust project names as needed
+            const projectNames = ["Refinement Board", "Project Backlog"];  // Adjust project names as needed
 
             const query = `query($org: String!) {
               organization(login: $org) {
