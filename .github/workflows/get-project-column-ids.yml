@@ -118,18 +118,3 @@ jobs:
               }`;
 
               const columnsResult = await github.graphql(columnsQuery, { projectId });
-
-              if (columnsResult.node && columnsResult.node.fields.nodes.length) {
-                columns[projectName] = columnsResult.node.fields.nodes.map(field => ({
-                  id: field.id,
-                  name: field.name,
-                  options: field.options ? field.options.map(option => ({
-                    id: option.id,
-                    name: option.name                
-                  })) : []
-                }));
-              }
-
-            console.log("====== COLUMNS ======");
-                    
-            core.setOutput("columns", JSON.stringify(columns)); 
