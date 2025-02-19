@@ -58,6 +58,14 @@ jobs:
                               field { id }
                               optionId
                             }
+                            ... on ProjectV2ItemFieldTextValue {
+                              field { id }
+                              text
+                            }
+                            ... on ProjectV2ItemFieldDateValue {
+                              field { id }
+                              date
+                            }  
                           }
                         }
                       }
