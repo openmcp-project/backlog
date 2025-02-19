@@ -52,8 +52,6 @@ jobs:
               });
   
               const itemId = itemResponse.addProjectV2ItemById.item.id;
-              console.log(`Issue #${issue.number} added to Project P1 and status set.`);
-
 
               // Step 2: Set the Status field
               await github.graphql(`
@@ -75,5 +73,5 @@ jobs:
                 fieldId: statusFieldId,
                 optionId: statusOptionId
               });
-  
-              console.log(`Issue #${issue.number} added to Project P1 and status set.`);
+              
+              console.log(`Issue ${issue.title} added to Project "Refinement" and status set to Validation.`);
