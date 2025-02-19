@@ -40,14 +40,23 @@ jobs:
             // Fetch all issues in Refinement Board that are in "Done" status
             const query = `
               query {
-                organization(login: "${org}") {
-                  projectV2(id: "${projectP1}") {
-                    items(first: 100, filters: { fieldId: "${statusFieldIdP1}", value: "${doneStatus}" }) {
+                node(id: "${projectP1}") {
+                  ... on ProjectV2 {
+                    items(first: 100) {
                       nodes {
+                        id
                         content {
                           ... on Issue {
                             id
                             number
+                          }
+                        }
+                        fieldValues(first: 10) {
+                          nodes {
+                            ... on ProjectV2ItemFieldSingleSelectValue {
+                              field { id }
+                              optionId
+                            }
                           }
                         }
                       }
@@ -58,14 +67,19 @@ jobs:
             `;
 
             const result = await github.graphql(query);
-            const items = result.organization.projectV2.items.nodes;
+            const items = result.node.items.nodes;
 
-            if (items.length === 0) {
+            // Filter only issues with "Done" status
+            const doneItems = items.filter(item =>
+              item.fieldValues.nodes.some(f => f.field.id === statusFieldIdP1 && f.optionId === doneOptionId)
+            );
+
+            if (doneItems.length === 0) {
               console.log("No issues in 'Done' status, nothing to do.");
               return;
             }
 
-            for (const item of items) {
+            for (const item of doneItems) {
               if (!item.content || !item.content.number) continue;
 
               const issueNumber = item.content.number;
