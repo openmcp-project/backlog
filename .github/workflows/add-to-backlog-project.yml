@@ -67,8 +67,12 @@ jobs:
               }
             `;
 
+     
+
             const result = await github.graphql(query);
             const items = result.node.items.nodes;
+
+            console.log("Issues retrieved!");
 
             // Filter only issues with "Done" status
             const doneItems = items.filter(item =>
