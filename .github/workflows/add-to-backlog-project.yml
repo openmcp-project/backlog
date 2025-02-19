@@ -53,7 +53,7 @@ jobs:
                         }
                         fieldValues(first: 10) {
                           nodes {
-                            __typename  // to distinguish between different field types
+                            __typename
                             ... on ProjectV2ItemFieldSingleSelectValue {
                               field { id }
                               optionId
@@ -66,8 +66,6 @@ jobs:
                 }
               }
             `;
-
-     
 
             const result = await github.graphql(query);
             const items = result.node.items.nodes;
