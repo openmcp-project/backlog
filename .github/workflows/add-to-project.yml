@@ -1,4 +1,4 @@
-name: Add new issues to Project
+name: Add new issues to Refinement Board with status "Validation"
 
 on:
   issues:
@@ -8,7 +8,7 @@ env:
   ACTIONS_STEP_DEBUG: true
 
 jobs:
-  add_to_p1:
+  add_to_refinement_as_validation:
     if: contains(fromJson('["backlog"]'), github.event.repository.name) # filter by repository name
     runs-on: ubuntu-latest
     steps:
