@@ -1,4 +1,4 @@
-name: Move Done Issues from P1 to P2
+name: Move Issues with Status "Done" from Refinement to Backlog
 
 on:
   schedule:
