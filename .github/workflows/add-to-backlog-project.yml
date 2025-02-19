@@ -1,0 +1,110 @@
+name: Move Done Issues from P1 to P2
+
+on:
+  schedule:
+    - cron: "0 7 * * *"  # Runs at 07:00 UTC every day
+  workflow_dispatch:  # Allows manual trigger
+
+env:
+  ACTIONS_STEP_DEBUG: true
+
+jobs:
+  move-done-issues:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Authenticate with GitHub App
+        id: auth
+        uses: tibdex/github-app-token@v1
+        with:
+          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.PRIVATE_KEY }}
+          installation_id: ${{ secrets.INSTALLATION_ID }}
+
+      - name: Move Issues from Refinement Board (in Status "Done") to Project Backlog (with Status "ToDo")
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ steps.auth.outputs.token }}
+          script: |
+            const org = context.repo.owner;
+            const projectP1 = "PVT_kwDOClHx584AyckH"; // Project ID for "Refinement Board" 
+            const projectP2 = "PVT_kwDOClHx584AwGgJ";  // Project ID for "Backlog Project"
+            const statusFieldIdP1 = "PVTSSF_lADOClHx584AyckHzgoZZ94";  // Status field ID for Refinement Board
+            const statusFieldIdP2 = "PVTSSF_lADOClHx584AwGgJzgmbNBk";  // Status field ID for Project Backlog
+            const doneStatus = "6c6113eb";  // "Done" Status Option ID of Refinement Board
+            const todoStatus = "f75ad846";  // "ToDo Status Option ID of Backlog Project
+
+            // Fetch all issues in Refinement Board that are in "Done" status
+            const query = `
+              query {
+                organization(login: "${org}") {
+                  projectV2(id: "${projectP1}") {
+                    items(first: 100, filters: { fieldId: "${statusFieldIdP1}", value: "${doneStatus}" }) {
+                      nodes {
+                        content {
+                          ... on Issue {
+                            id
+                            number
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            `;
+
+            const result = await github.graphql(query);
+            const items = result.organization.projectV2.items.nodes;
+
+            if (items.length === 0) {
+              console.log("No issues in 'Done' status, nothing to do.");
+              return;
+            }
+
+            for (const item of items) {
+              if (!item.content || !item.content.number) continue;
+
+              const issueNumber = item.content.number;
+              console.log(`Moving issue #${issueNumber} from Refinement Board to Project Backlog ...`);
+
+              // Add issue to Project Backlog
+              const addToProjectMutation = `
+                mutation {
+                  addProjectV2ItemById(input: {
+                    projectId: "${projectP2}",
+                    contentId: "${item.content.id}"
+                  }) {
+                    item {
+                      id
+                    }
+                  }
+                }
+              `;
+
+              const addToProjectResult = await github.graphql(addToProjectMutation);
+              const newProjectItemId = addToProjectResult.addProjectV2ItemById.item.id;
+
+              // Set status to "To Do" in Backlog Project
+              const updateStatusMutation = `
+                mutation {
+                  updateProjectV2ItemFieldValue(input: {
+                    projectId: "${projectP2}",
+                    itemId: "${newProjectItemId}",
+                    fieldId: "${statusFieldIdP2}",
+                    value: { singleSelectOptionId: "${todoStatus}" }
+                  }) {
+                    projectV2Item {
+                      id
+                    }
+                  }
+                }
+              `;
+
+              await github.graphql(updateStatusMutation);
+
+              console.log(`Issue #${issueNumber} added to Project Backlog with status "To Do".`);
+            }            
