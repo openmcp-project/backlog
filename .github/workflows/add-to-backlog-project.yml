@@ -58,10 +58,6 @@ jobs:
                             ... on ProjectV2ItemFieldSingleSelectValue {
                               field {
                                 __typename
-                                ... on ProjectV2Field {
-                                  id
-                                  name
-                                }
                                 ... on ProjectV2SingleSelectField {
                                   id
                                   name
@@ -85,6 +81,7 @@ jobs:
             const items = result.node.items.nodes;
 
             console.log("Issues retrieved!");
+            console.log(items);
 
             // Filter only issues with "Done" status
             const doneItems = items.filter(item =>
