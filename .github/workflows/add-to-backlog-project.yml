@@ -46,6 +46,7 @@ jobs:
                       nodes {
                         id
                         content {
+                          __typename
                           ... on Issue {
                             id
                             number
@@ -57,15 +58,7 @@ jobs:
                             ... on ProjectV2ItemFieldSingleSelectValue {
                               field { id }
                               optionId
-                            }
-                            ... on ProjectV2ItemFieldTextValue {
-                              field { id }
-                              text
-                            }
-                            ... on ProjectV2ItemFieldDateValue {
-                              field { id }
-                              date
-                            }  
+                            } 
                           }
                         }
                       }
