@@ -67,6 +67,7 @@ jobs:
                                   }
                                 }                                
                               }
+                              optionId
                             } 
                           }
                         }
@@ -89,9 +90,10 @@ jobs:
                 console.log(` - Type: ${f.__typename}`);
                 console.log(` - Field ID: ${f.field?.id}`);
                 console.log(` - Option ID: ${f.optionId}`);
+                console.log("Field Value Object:", JSON.stringify(f, null, 2));
               });
             });
-            
+
             // Filter only issues with "Done" status
             const doneItems = items.filter(item =>
               item.fieldValues.nodes.some(f => f.__typename === "ProjectV2ItemFieldSingleSelectValue" &&
