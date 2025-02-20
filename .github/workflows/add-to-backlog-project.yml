@@ -83,6 +83,15 @@ jobs:
             console.log("Issues retrieved!");
             console.log(items);
 
+            items.forEach(item => {
+              console.log(`Item ID: ${item.id}`);
+              item.fieldValues.nodes.forEach(f => {
+                console.log(` - Type: ${f.__typename}`);
+                console.log(` - Field ID: ${f.field?.id}`);
+                console.log(` - Option ID: ${f.optionId}`);
+              });
+            });
+            
             // Filter only issues with "Done" status
             const doneItems = items.filter(item =>
               item.fieldValues.nodes.some(f => f.__typename === "ProjectV2ItemFieldSingleSelectValue" &&
