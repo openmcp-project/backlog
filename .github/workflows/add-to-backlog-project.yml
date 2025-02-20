@@ -56,8 +56,21 @@ jobs:
                           nodes {
                             __typename
                             ... on ProjectV2ItemFieldSingleSelectValue {
-                              field { id }
-                              optionId
+                              field {
+                                __typename
+                                ... on ProjectV2Field {
+                                  id
+                                  name
+                                }
+                                ... on ProjectV2SingleSelectField {
+                                  id
+                                  name
+                                  options {
+                                    id
+                                    name
+                                  }
+                                }                                
+                              }
                             } 
                           }
                         }
