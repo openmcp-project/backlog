@@ -30,10 +30,10 @@ jobs:
           github-token: ${{ steps.auth.outputs.token }}
           script: |
             const org = context.repo.owner;
-            const projectP1 = "PVT_kwDOClHx584AyckH"; // Project ID for "Refinement Board" 
+            const projectP1 = "PVT_kwDOClHx584AyckH";  // Project ID for "Refinement Board" 
             const projectP2 = "PVT_kwDOClHx584AwGgJ";  // Project ID for "Backlog Project"
-            const statusFieldIdP1 = "PVTSSF_lADOClHx584AyckHzgoZZ94";  // Status field ID for Refinement Board
-            const statusFieldIdP2 = "PVTSSF_lADOClHx584AwGgJzgmbNBk";  // Status field ID for Project Backlog
+            const statusFieldIdP1 = "PVTSSF_lADOClHx584AyckHzgoZZ94";  // Issue Status field ID for Refinement Board
+            const statusFieldIdP2 = "PVTSSF_lADOClHx584AwGgJzgmbNBk";  // Issue Status field ID for Project Backlog
             const doneStatus = "6c6113eb";  // "Done" Status Option ID of Refinement Board
             const todoStatus = "f75ad846";  // "ToDo Status Option ID of Backlog Project
 
@@ -81,19 +81,6 @@ jobs:
             const result = await github.graphql(query);
             const items = result.node.items.nodes;
 
-            console.log("Issues retrieved!");
-            console.log(items);
-
-            items.forEach(item => {
-              console.log(`Item ID: ${item.id}`);
-              item.fieldValues.nodes.forEach(f => {
-                console.log(` - Type: ${f.__typename}`);
-                console.log(` - Field ID: ${f.field?.id}`);
-                console.log(` - Option ID: ${f.optionId}`);
-                console.log("Field Value Object:", JSON.stringify(f, null, 2));
-              });
-            });
-
             // Filter only issues with "Done" status
             const doneItems = items.filter(item =>
               item.fieldValues.nodes.some(f => f.__typename === "ProjectV2ItemFieldSingleSelectValue" &&
@@ -110,7 +97,7 @@ jobs:
               if (!item.content || !item.content.number) continue;
 
               const issueNumber = item.content.number;
-              console.log(`Moving issue #${issueNumber} from Refinement Board to Project Backlog ...`);
+              console.log(`Adding issue #${issueNumber} to Project Backlog ...`);
 
               // Add issue to Project Backlog
               const addToProjectMutation = `
@@ -148,4 +135,4 @@ jobs:
               await github.graphql(updateStatusMutation);
 
               console.log(`Issue #${issueNumber} added to Project Backlog with status "To Do".`);
-            }            
+            }
