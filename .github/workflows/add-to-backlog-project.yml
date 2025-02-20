@@ -90,7 +90,7 @@ jobs:
             const doneItems = items.filter(item =>
               item.fieldValues.nodes.some(f => f.__typename === "ProjectV2ItemFieldSingleSelectValue" &&
                                                 f.field.id === statusFieldIdP1 &&
-                                                f.optionId === doneOptionId)
+                                                f.optionId === doneStatus)
             );
 
             if (doneItems.length === 0) {
