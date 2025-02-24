@@ -1,0 +1,114 @@
+name: "Epic"
+description: "Guided creation of an epic for `openMCP`"
+title: "Epic: <one liner describing what this epic covers> "
+labels: ["kind/epic", "needs/validation"]
+body:
+  - type: textarea
+    id: Objective
+    attributes:
+      label: "Understand the Epic"
+      description: "What is the Goal of this Epic ?"
+      placeholder: |
+        <What is this Epic about?>
+        <What is the value-add?>
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: "Context / Background"
+      description: "Provide any background or context information required to understand the epic more clearly."
+      placeholder: |
+        <Background / Contexte>
+    validations:
+      required: false
+  - type: textarea
+    id: user-stories
+    attributes:
+      label: "User Stories or tasks"
+      description: "Which individual User Stories or tasks contribute to the overall Epic ?"
+      placeholder: |
+        <Put yourself into the shoes of an Enduser. What needs to be done to call this Epic done?>
+        - [ ] <User Story 1>
+        - [ ] <User Story 2>
+        - [ ] ...
+    validations:
+      required: false
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: "What is required to accept the Epic as finished."
+      description: "Define in detail which features / improvements must be available before accepting the Epic as finished."
+      placeholder: |
+        - [ ] <AC 1>
+        - [ ] <AC 2>
+        - [ ] <...>
+    validations:
+      required: true
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: "Dependencies of this Epic"
+      description: "Are there any known dependencies towards other Epics, tasks, other open source projects ?"
+      placeholder: |
+        - [ ] <dep 1>
+        - [ ] <dep 2>
+        - [ ] <...>
+    validations:
+      required: false
+  - type: textarea
+    id: risks
+    attributes:
+      label: "Risks of this Epic"
+      description: "Are there any known risks for this epic ?"
+      placeholder: |
+        - [ ] <risk 1>
+        - [ ] <risk 2>
+        - [ ] <...>
+    validations:
+      required: false
+  - type: textarea
+    id: stakeholders
+    attributes:
+      label: "Known Stakeholders of this Epic"
+      description: "Who is affected by this epic? Endusers ? Operators ? Developers ?"
+      placeholder: |
+        - [ ] <stakeholder 1>
+        - [ ] <stakeholder 2>
+        - [ ] <...>
+    validations:
+      required: false
+  - type: textarea
+    id: timeline
+    attributes:
+      label: "Milestone Definitions for this Epic."
+      description: "Into which Milestones can this epic be divided ? What are their individual rough timelines ? Does not have to be exact, only a rough idea how long the epic and its milestones will take."
+      placeholder: |
+        - [ ] <Milestone 1 + date>
+        - [ ] <Milestone 2 + date>
+        - [ ] <...>
+    validations:
+      required: true
+  - type: textarea
+    id: metrics
+    attributes:
+      label: "Metrics Definition for this Epic."
+      description: "What are measurable key metrics which indicate the successfull implementation of the Epic ?"
+      placeholder: |
+        - [ ] <Metric 1>
+        - [ ] <Metric 2>
+        - [ ] <...>
+    validations:
+      required: true
+  - type: textarea
+    id: resources
+    attributes:
+      label: "Any further valuable resources."
+      description: "Any further resources, links, documents, ideas which might be valuable for thie Epic."
+      placeholder: |
+        - [ ] <resource 1>
+        - [ ] <resource 2>
+        - [ ] <...>
+    validations:
+      required: false    
+      
