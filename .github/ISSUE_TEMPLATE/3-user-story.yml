@@ -1,0 +1,59 @@
+name: "User Story"
+description: "Guided creation of an user story for `openMCP`"
+title: "User Story: <one liner describing what this user story covers> "
+labels: ["kind/user-story", "needs/validation"]
+body:
+  - type: textarea
+    id: Objective
+    attributes:
+      label: "Understand the User Story"
+      description: "What is the Purpose of this User Story ?"
+      placeholder: |
+       - As an `...`,
+       - I need to be able to `...`, 
+       - so that I can `...`
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: "Tasks"
+      description: "The individual tasks this User Story contains."
+      placeholder: |
+        Added as sub-issues to this User Story...
+    validations:
+      required: false
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: "What is required to accept the User Story as finished."
+      description: "Define in detail which features / improvements must be available before accepting the User Story as finished."
+      placeholder: |
+        - [ ] <AC 1>
+        - [ ] <AC 2>
+        - [ ] <...>
+    validations:
+      required: true
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: "Dependencies"
+      description: "Are there any known dependencies towards other Epics, tasks, other open source projects ?"
+      placeholder: |
+        - [ ] <dep 1>
+        - [ ] <dep 2>
+        - [ ] <...>
+    validations:
+      required: false
+  - type: textarea
+    id: resources
+    attributes:
+      label: "Any further valuable resources."
+      description: "Any further resources, links, documents, ideas which might be valuable for thie Epic."
+      placeholder: |
+        - [ ] <resource 1>
+        - [ ] <resource 2>
+        - [ ] <...>
+    validations:
+      required: false    
+      
