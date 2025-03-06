@@ -9,7 +9,7 @@ body:
       label: "Understand the Task"
       description: "What is the Purpose of this Task ?"
       value: |
-        ##Description
+        **Description**
         
     validations:
       required: true
