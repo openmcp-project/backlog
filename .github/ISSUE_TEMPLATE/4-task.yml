@@ -1,0 +1,46 @@
+name: "Task"
+description: "Guided creation of an general Task for `openMCP`"
+title: "Task: < ... > "
+labels: ["kind/task", "needs/validation"]
+body:
+  - type: textarea
+    id: Objective
+    attributes:
+      label: "Understand the Task"
+      description: "What is the Purpose of this Task ?"
+      value: |
+        ##Description
+        
+    validations:
+      required: true
+      
+  - type: textarea
+    id: resources
+    attributes:
+      label: "Any further valuable resources."
+      description: "Any further resources, links, documents, ideas which might be valuable for thie Epic."
+      placeholder: |
+        - [ ] <resource 1>
+        - [ ] <resource 2>
+        - [ ] <...>
+    validations:
+      required: false
+      
+  - type: textarea
+    id: done-criteria
+    attributes:
+      label: "What is required to accept the Task as done."
+      description: "Define in detail what needs to be done in order to fully close this task."
+      value: |
+        **Done Criteria**
+        - [ ] ...
+        - [ ] Code has been reviewed by other team members
+        - [ ] Internal technical Documentation created/updated
+        - [ ] New / changed code is documented
+        - [ ] Unit Tests created for new code or existing Unit Tests updated
+        - [ ] Integration Test Suite updated
+        - [ ] Enduser Documentation updated (if applicable)
+        - [ ] Successful demonstration in Review
+    validations:
+      required: true
+      
