@@ -18,6 +18,6 @@ contact_links:
   - name: External Secrets Operator
     url: https://github.com/external-secrets/external-secrets
     about: General support around External Secrets operator
-  - name: External Secrets Operator
+  - name: Kyverno
     url: https://github.com/kyverno/kyverno
     about: General support around Kyverno
