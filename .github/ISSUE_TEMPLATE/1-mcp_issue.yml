@@ -1,31 +1,23 @@
 name: "`openMCP` Issue"
-description: "Guided creation of an issue for a `openMCP`"
+description: "Guided creation of a bug report for `openMCP`"
 title: "<problem title> "
 labels: ["kind/bug", "needs/tech-advice"]
 body:
-  - type: markdown
-    attributes:
-      value: "# `openMCP` help center "
-  - type: markdown
-    attributes:
-      value: |
-        Some issues don't need the involvement of a DoD. To help us help you more effectively, take a look at these helpful links. 
-        If you can't find a solution, go ahead and create a ticket.
-        - TODO: Link support pages here once life - OTT/KOBER
   - type: markdown
     attributes:
       value: "# Impact"
   - type: markdown
     attributes:
       value: |
-        Please provide information for this issue, such as specifying which MCP affected.
-        By categorizing and prioritizing the issue appropriately, you can help us process this ticket faster.
+        Please provide as much information as possible for this bug report, such as specifying any error messages you have seen, and/or
+        describing in detail what exactly happened.
+        By categorizing and prioritizing the issue appropriately, you can help us process this issue faster.
   - type: textarea
     id: similar-issues
     attributes:
-      label: "Is the same problem occurring with other `openMCP`s?"
-      description: In case other users are report similar issues, please post the issue links here.
-      placeholder: "Please post the links other `openMCP`s affected by this issue"
+      label: "Is the same problem already mentioned in other bug reports ?"
+      description: In case other users have reported similar issues already, please post the issue links here.
+      placeholder: "Links to other issues reporting a similar problem."
     validations:
       required: false
   - type: dropdown
@@ -34,7 +26,7 @@ body:
       required: true
     attributes:
       label: "Please assign the appropriate priority to this issue."
-      description: "Please use the priorities critical / blocker carefully. TODO: Link Priority definitions (OTT/KOBER)"
+      description: "Please use the priorities critical / blocker carefully."
       options:
         - /priority normal
         - /priority critical
@@ -42,14 +34,6 @@ body:
   - type: markdown
     attributes:
       value: "# Issue Details"
-  - type: input
-    id: timestamp
-    attributes:
-      label: "When did it (start to) happen?"
-      description: "Please provide a UTC timestamp to indicate when the issue happened or started to happen."
-      placeholder: "2029-01-01T15:00:00Z"
-    validations:
-      required: true
   - type: textarea
     id: what-happened
     attributes:
@@ -70,7 +54,7 @@ body:
     id: logs
     attributes:
       label: "Please provide meaningful logs that outline the issue"
-      description: "Please share any meaningful logs. For example, debug logs from a command line or snippets from the logging stack are a great starting point. [Check out this example for how to analyze some issues](https://pages.github.tools.sap/cloud-orchestration/docs/managed-control-planes/fundamentals). If there are no relevant logs, enter n/a."
+      description: "Please share any meaningful logs. If there are no relevant logs, enter n/a."
       placeholder: "..."
       render: bash
     validations:
@@ -97,16 +81,5 @@ body:
     id: anything-else
     attributes:
       label: "Anything else we should know?"
-    validations:
-      required: false
-  - type: textarea
-    id: additional-contacts
-    attributes:
-      label: "Any additional contacts to add?"
-      description: "These users will be considered as co-authors by our bot automation. Please follow the same exact structure as placeholder."
-      placeholder: |
-        - @D123456
-        - @I654321
-        - ...
     validations:
       required: false
