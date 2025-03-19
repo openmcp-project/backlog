@@ -1,5 +1,5 @@
-name: "Feature Request Issue"
-description: "Guided creation of an feature request for `openMCP`..."
+name: "Feature Request"
+description: "Guided creation of a feature request for `openMCP`..."
 title: "Feature: <one liner describing what this feature will do> "
 labels: ["kind/feature-request", "needs/validation"]
 body:
