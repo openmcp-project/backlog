@@ -1,5 +1,5 @@
 name: "Feature Request"
-description: "Guided creation of a feature request for `openMCP`..."
+description: "Guided creation of a feature request for `openMCP`"
 title: "Feature: <one liner describing what this feature will do> "
 labels: ["kind/feature-request", "needs/validation"]
 body:
@@ -7,7 +7,7 @@ body:
     id: problem
     attributes:
       label: "Understand the problem"
-      description: "Describe challenge this feature will solve/mitigate"
+      description: "Describe the challenge this feature will solve/mitigate or new functionality this feature would introduce."
       placeholder: |
         <in which situation does the need for this feature come up?>
         <how are solving/can you solve this today?>
