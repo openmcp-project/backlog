@@ -1,5 +1,5 @@
 name: "Task"
-description: "Guided creation of an general Task for `openMCP`"
+description: "Guided creation of an implementation task for `openMCP`"
 title: "Task: < ... > "
 labels: ["kind/task", "needs/validation"]
 body:
