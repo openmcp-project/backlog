@@ -1,10 +1,12 @@
 [![REUSE status](https://api.reuse.software/badge/github.com/openmcp-project/backlog)](https://api.reuse.software/info/github.com/openmcp-project/backlog)
 
-# backlog
+# Backlog for openMCP
 
-## About this project
+## About
 
-Backlog for epics and user stories
+In this repository, we store epics and user stories as individual GitHub issues.
+
+These issues define our current planning and implementation backlog for the openMCP project. Mostly, the individual implementation tasks are located in the actual code repository located in the openMCP-project organization, e.g. [control-plane-operator](https://github.com/openmcp-project/control-plane-operator) or [project-workspace-operator](https://github.com/openmcp-project/project-workspace-operator). Implementation task involving code changes in more than one repository are also stored in this backlog repo.
 
 ## Support, Feedback, Contributing
 
