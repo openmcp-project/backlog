@@ -1,36 +1,8 @@
-name: "`openMCP` Issue"
+name: "`openMCP` bug report"
 description: "Guided creation of a bug report for `openMCP`"
 title: "<problem title> "
 labels: ["kind/bug", "needs/tech-advice"]
 body:
-  - type: markdown
-    attributes:
-      value: "# Impact"
-  - type: markdown
-    attributes:
-      value: |
-        Please provide as much information as possible for this bug report, such as specifying any error messages you have seen, and/or
-        describing in detail what exactly happened.
-        By categorizing and prioritizing the issue appropriately, you can help us process this issue faster.
-  - type: textarea
-    id: similar-issues
-    attributes:
-      label: "Is the same problem already mentioned in other bug reports ?"
-      description: In case other users have reported similar issues already, please post the issue links here.
-      placeholder: "Links to other issues reporting a similar problem."
-    validations:
-      required: false
-  - type: dropdown
-    id: priority
-    validations:
-      required: true
-    attributes:
-      label: "Please assign the appropriate priority to this issue."
-      description: "Please use the priorities critical / blocker carefully."
-      options:
-        - /priority normal
-        - /priority critical
-        - /priority blocker
   - type: markdown
     attributes:
       value: "# Issue Details"
@@ -77,6 +49,25 @@ body:
       placeholder: "..."
     validations:
       required: true
+  - type: textarea
+    id: similar-issues
+    attributes:
+      label: "Is the same problem already mentioned in other bug reports ?"
+      description: In case other users have reported similar issues already, please post the issue links here.
+      placeholder: "Links to other issues reporting a similar problem."
+    validations:
+      required: false
+  - type: dropdown
+    id: priority
+    validations:
+      required: true
+    attributes:
+      label: "Please assign the appropriate priority to this issue."
+      description: "Please use the priorities critical / blocker carefully."
+      options:
+        - /priority normal
+        - /priority critical
+        - /priority blocker
   - type: textarea
     id: anything-else
     attributes:
