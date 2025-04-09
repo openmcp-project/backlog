@@ -88,7 +88,7 @@ body:
         - [ ] <Milestone 2 + date>
         - [ ] <...>
     validations:
-      required: true
+      required: false
   - type: textarea
     id: metrics
     attributes:
@@ -99,7 +99,7 @@ body:
         - [ ] <Metric 2>
         - [ ] <...>
     validations:
-      required: true
+      required: false
   - type: textarea
     id: resources
     attributes:
