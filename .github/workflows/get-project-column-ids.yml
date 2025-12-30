@@ -30,7 +30,7 @@ jobs:
           github-token: ${{ steps.auth.outputs.token }}
           script: |
             const org = context.repo.owner;
-            const projectNames = ["Refinement Board", "Project Backlog"];  // Adjust project names as needed
+            const projectNames = ["MCP core stream"];  // Adjust project names as needed
 
             const query = `query($org: String!) {
               organization(login: $org) {
