@@ -18,7 +18,7 @@ body:
     id: resources
     attributes:
       label: "Any further valuable resources."
-      description: "Any further resources, links, documents, ideas which might be valuable for thie Epic."
+      description: "Any further resources, links, documents, ideas which might be valuable for this Task."
       placeholder: |
         - [ ] <resource 1>
         - [ ] <resource 2>
